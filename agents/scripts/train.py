@@ -24,7 +24,6 @@ from __future__ import division
 from __future__ import print_function
 
 import datetime
-import functools
 import os
 
 import gym
@@ -100,9 +99,6 @@ def train(config, env_processes):
     Evaluation scores.
   """
   tf.reset_default_graph()
-  with config.unlocked:
-    config.policy_optimizer = getattr(tf.train, config.policy_optimizer)
-    config.value_optimizer = getattr(tf.train, config.value_optimizer)
   if config.update_every % config.num_agents:
     tf.logging.warn('Number of agents should divide episodes per update.')
   with tf.device('/cpu:0'):
